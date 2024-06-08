@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import random
-import ec2_metadata
+from ec2_metadata import ec2_metadata
 from dotenv import load_dotenv
 load_dotenv("j.env")
 intents = discord.Intents.default()
