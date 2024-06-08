@@ -21,6 +21,7 @@ token = os.getenv('TOKEN')
 @client.event 
 async def on_ready(): 
 	print("Logged in as a bot {0.user}".format(client))
+	print(f'Your EC2 Data are as follows: IP Address: {ip_address}, Region: {region}, Availability Zone: {availability_zone}')
 @client.event 
 async def on_message(message): 
 	username = str(message.author).split("#")[0] 
@@ -43,7 +44,7 @@ async def on_message(message):
 			jokes = [1,2,3] 
 			await message.channel.send(random.choice(jokes)) 
 		elif user_message.lower() == "tell me about my server!":
-			await message.channel.send(f'{ip_address}, {region}, {availability_zone}')
+			await message.channel.send(f'Your EC2 Data are as follows: IP Address: {ip_address}, Region: {region}, Availability Zone: {availability_zone}')
 	await client.process_commands(message)
 client.run(token)
 
