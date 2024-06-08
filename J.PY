@@ -2,10 +2,15 @@ import discord
 from discord.ext import commands
 import os
 import random
+import ec2_metadata
 from dotenv import load_dotenv
 load_dotenv("j.env")
 intents = discord.Intents.default()
 intents.messages = True
+
+ip_address = ec2_metadata.public_ipv4 or ec2_metadata.private_ipv4
+region = ec2_metadata.region
+availability_zone = ec2_metadata.availability_zone
 
 client = discord.Client(intents=intents)
 client = commands.Bot(command_prefix="!", intents=intents)
@@ -37,6 +42,10 @@ async def on_message(message):
 		elif user_message.lower() == "tell me a joke": 
 			jokes = [1,2,3] 
 			await message.channel.send(random.choice(jokes)) 
+		elif user_message.lower() == "tell me about my server!":
+			await message.channel.send(f'{ip_address}, {region}, {availability_zone}')
 	await client.process_commands(message)
 client.run(token)
+
+
 
